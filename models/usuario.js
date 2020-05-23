@@ -37,3 +37,10 @@ const UsuarioSchema = new mongoose.Schema({
         default: {}
     }
 },{ timestamps: true });
+
+UsuarioSchema.plugin(uniqueValidator, { message: "Já está sendo utilizado."});
+
+UsuarioSchema.methods.setSenha = function(password){
+    this.salt = crypto.randomBytes(16).toString("hex");
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, "sha12").toString("hex");
+}
