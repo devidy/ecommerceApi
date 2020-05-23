@@ -39,6 +39,7 @@ app.use(bodyParser.json({ limit: 1.5*1024*1024 }));
 
 //  Models
 require("./model");
+
 // Rotas
 app.use("/", require("./routes"));
 
